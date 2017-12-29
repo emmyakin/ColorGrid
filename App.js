@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -26,11 +27,14 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.text}>
+          <Text style={{ fontSize: 18 }}>Click a square to change its color</Text>
+        </View>
         {gridValues.map((val, index) => {
           const colorIndex = this.state[index] ? this.state[index] : val;
           return (<TouchableOpacity
             key={`color-${index}`}
-            style={{ backgroundColor: getIndexColor(colorIndex), width: '14.2%', height: '5%' }}
+            style={[styles.button, { backgroundColor: getIndexColor(colorIndex) }]}
             onPress={() => this._onPressButton(index, val)}
           >
           </TouchableOpacity>
@@ -44,10 +48,24 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 30,
+    padding: 20,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignContent: 'center',
     flexWrap: 'wrap',
     flexDirection: 'row',
   },
+  text: {
+    width: '100%',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  button: {
+    width: '12%',
+    height: '7%',
+    padding: 10,
+    marginLeft: 2,
+    marginRight: 2,
+    marginTop: 4,
+    marginBottom: 4,
+  }
 });
